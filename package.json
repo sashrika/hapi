@@ -1,0 +1,17 @@
+{
+  "name": "vending_services",
+  "version": "1.0.0",
+  "description": "backend services for vending machine",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "prabash",
+  "license": "ISC",
+  "dependencies": {
+    "hapi": "^17.2.0"
+  },
+  "devDependencies": {
+    "nodemon": "^1.14.11"
+  }
+}
