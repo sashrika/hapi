@@ -77,31 +77,18 @@ server.route({
     }
 });
 
-server.route({
-    method: ['PUT'],
-    path: '/vending/{machine_id}/{block_id}',
-    handler: function (request, reply) {
-        return("update vending machine "+request.params.machine_id+" of "+request.params.block_id);
-    }
-});
-
 var updateStorage = function a(storage_id, payload) {
     return new Promise(function (resolve, reject) {
         MongoClient.connect(url, function (err, db) {
             if (err) throw err;
             var databaseObject = db.db("vending_fyp");
             var query = { storageId: parseInt(storage_id) };
-            // databaseObject.collection("storages").find(query,{ _id: false }).toArray(function (err, result) {
-            //     if (err) throw err;
-            //     db.close();
-            //     console.log("hi "+result);
-            // });
             var updateObject =  { $set:eval(payload)};            
             databaseObject.collection("storages").updateOne(query, updateObject,function(err, res) {
                 if (err) throw err;
-                console.log("1 document updated");
+                console.log("1 storage updated");
                 db.close();
-                resolve("1 document updated");
+                resolve("1 storage updated");
               });
         });
     });
@@ -114,6 +101,56 @@ server.route({
         return updateStorage(request.params.storage_id , request.payload).then((spaces) => {
             return spaces
         });
+    }
+});
+
+var updateSpirals = function a(spiral_id, payload) {
+    return new Promise(function (resolve, reject) {
+        MongoClient.connect(url, function (err, db) {
+            if (err) throw err;
+            var databaseObject = db.db("vending_fyp");
+            var query = { spiralId: parseInt(spiral_id) };
+            var updateObject =  { $set:eval(payload)};            
+            databaseObject.collection("spirals").updateOne(query, updateObject,function(err, res) {
+                if (err) throw err;
+                console.log("1 spiral updated");
+                db.close();
+                resolve("1 spiral updated");
+              });
+        });
+    });
+}
+
+var updateSpaces = function a(space_id, payload) {
+    return new Promise(function (resolve, reject) {
+        MongoClient.connect(url, function (err, db) {
+            if (err) throw err;
+            var databaseObject = db.db("vending_fyp");
+            var query = { spaceId: parseInt(space_id) };
+            var updateObject =  { $set:eval(payload)};            
+            databaseObject.collection("spaces").updateOne(query, updateObject,function(err, res) {
+                if (err) throw err;
+                console.log("1 space updated");
+                db.close();
+                resolve("1 space updated");
+              });
+        });
+    });
+}
+
+server.route({
+    method: ['PUT'],
+    path: '/vending/{machine_id}/{block_id}',
+    handler: function (request, reply) {
+        if(request.params.machine_id==1){
+            return updateSpirals(request.params.block_id , request.payload).then((status) => {
+                return status
+            });
+        }else if(request.params.machine_id==2){
+            return updateSpaces(request.params.block_id , request.payload).then((status) => {
+                return status
+            });
+        }
     }
 });
 
