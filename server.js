@@ -42,7 +42,7 @@ var getVending2Data = function a(a,s) {
     });
 }
 
-var getVending2Data = function a(a,s) {
+var getStorageData = function a(a,s) {
     return new Promise(function (resolve, reject) {
         MongoClient.connect(url, function (err, db) {
             if (err) throw err;
@@ -77,7 +77,7 @@ server.route({
     method: 'GET',
     path: '/storages',
     handler: function (request, h) {
-        return getVending2Data().then((storages) => { return storages });
+        return getStorageData().then((storages) => { return storages });
     }
 });
 
