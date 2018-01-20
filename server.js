@@ -69,14 +69,6 @@ server.route({
     }
 });
 
-// server.route({
-//     method: 'GET',
-//     path: '/vending_2',
-//     handler: function (request, h) {
-//         return getVending2Data().then((spirals) => { return spirals });
-//     }
-// });
-
 server.route({
     method: 'GET',
     path: '/storages',
@@ -87,10 +79,17 @@ server.route({
 
 server.route({
     method: ['PUT'],
-    path: '/update',
+    path: '/vending/{machine_id}/{block_id}',
     handler: function (request, reply) {
-        u.push(request.payload);
-        return(request.payload);
+        return("update vending machine "+request.params.machine_id+" of "+request.params.block_id);
+    }
+});
+
+server.route({
+    method: ['PUT'],
+    path: '/storage/{storage_id}',
+    handler: function (request, reply) {
+        return("update stoarage "+request.params.storage_id);
     }
 });
 
