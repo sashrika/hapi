@@ -1,12 +1,26 @@
 'use strict';
 
 const Hapi = require('hapi');
+var mongo = require('mongodb');
+
+
+var url = "mongodb://admin:admin123@localhost:27017/vending_fyp";
+
+var MongoClient = require('mongodb').MongoClient;
+MongoClient.connect(url, function(err, db) {
+    console.log("Database");
+  if (err) throw err;
+  console.log("Database created!");
+  db.close();
+});
+
 
 // Create a server with a host and port
 const server = Hapi.server({ 
     host: 'localhost', 
     port: 8000 
 });
+
 
 let u = [{ spiralId: "1", max: "7", remaining: "4" },
 { spiralId: "2", max: "7", remaining: "3" }];

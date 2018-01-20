@@ -9,7 +9,8 @@
   "author": "prabash",
   "license": "ISC",
   "dependencies": {
-    "hapi": "^17.2.0"
+    "hapi": "^17.2.0",
+    "mongodb": "^3.0.1"
   },
   "devDependencies": {
     "nodemon": "^1.14.11"
