@@ -59,19 +59,23 @@ var getStorageData = function a(a,s) {
 
 server.route({
     method: 'GET',
-    path: '/vending_1',
+    path: '/vending/{id}',
     handler: function (request, h) {
-        return getVending1Data().then((spirals) => { return spirals });
+        if(encodeURIComponent(request.params.id)==1){
+            return getVending1Data().then((spirals) => { return spirals });
+        }else if(encodeURIComponent(request.params.id)==2){
+            return getVending2Data().then((spaces) => { return spaces });
+        }
     }
 });
 
-server.route({
-    method: 'GET',
-    path: '/vending_2',
-    handler: function (request, h) {
-        return getVending2Data().then((spirals) => { return spirals });
-    }
-});
+// server.route({
+//     method: 'GET',
+//     path: '/vending_2',
+//     handler: function (request, h) {
+//         return getVending2Data().then((spirals) => { return spirals });
+//     }
+// });
 
 server.route({
     method: 'GET',
