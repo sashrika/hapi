@@ -8,13 +8,25 @@ const server = Hapi.server({
     port: 8000 
 });
 
+let u = [{ spiralId: "1", max: "7", remaining: "4" },
+{ spiralId: "2", max: "7", remaining: "3" }];
+
 // Add the route
 server.route({
     method: 'GET',
     path:'/hello', 
     handler: function (request, h) {
-        console.log(h)
-        return 'hello hapi js';
+        console.log(u)
+        return u;
+    }
+});
+
+server.route({
+    method: ['PUT'],
+    path: '/update',
+    handler: function (request, reply) {
+        u.push(request.payload);
+        return(request.payload);
     }
 });
 
