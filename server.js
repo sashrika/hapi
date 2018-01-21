@@ -17,7 +17,7 @@ var getVending1Data = function a(a,s) {
         MongoClient.connect(url, function (err, db) {
             if (err) throw err;
             var databaseObject = db.db("vending_fyp");
-            databaseObject.collection("spirals").find({},{ _id: false }).toArray(function (err, result) {
+            databaseObject.collection("spirals").find({},{fields:{_id: 0}}).toArray(function (err, result) {
                 if (err) throw err;
                 db.close();
                 resolve(result);
@@ -32,7 +32,7 @@ var getVending2Data = function a(a,s) {
         MongoClient.connect(url, function (err, db) {
             if (err) throw err;
             var databaseObject = db.db("vending_fyp");
-            databaseObject.collection("spaces").find({},{ _id: false }).toArray(function (err, result) {
+            databaseObject.collection("spaces").find({},{fields:{_id: 0}}).toArray(function (err, result) {
                 if (err) throw err;
                 db.close();
                 resolve(result);
@@ -47,7 +47,7 @@ var getStorageData = function a(a,s) {
         MongoClient.connect(url, function (err, db) {
             if (err) throw err;
             var databaseObject = db.db("vending_fyp");
-            databaseObject.collection("storages").find({},{ _id: false }).toArray(function (err, result) {
+            databaseObject.collection("storages").find({},{fields:{_id: 0}}).toArray(function (err, result) {
                 if (err) throw err;
                 db.close();
                 resolve(result);
