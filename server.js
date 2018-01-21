@@ -103,11 +103,37 @@ var updateStorage = function a(storage_id, payload) {
     });
 }
 
+var updateStoragePost = function a(storage_id, payload) {
+    return new Promise(function (resolve, reject) {
+        MongoClient.connect(url, function (err, db) {
+            if (err) throw err;
+            var databaseObject = db.db("vending_fyp");
+            var query = { storageId: parseInt(storage_id) };          
+            databaseObject.collection("storages").updateOne(query, { $set:JSON.parse(payload)},function(err, res) {
+                if (err) throw err;
+                console.log("1 storage updated");
+                db.close();
+                resolve("1 storage updated");
+              });
+        });
+    });
+}
+
 server.route({
     method: ['PUT'],
     path: '/storage/{storage_id}',
     handler: function (request, reply) {
         return updateStorage(request.params.storage_id , request.payload).then((spaces) => {
+            return spaces
+        });
+    }
+});
+
+server.route({
+    method: ['POST'],
+    path: '/storage/{storage_id}',
+    handler: function (request, reply) {
+        return updateStoragePost(request.params.storage_id , request.payload).then((spaces) => {
             return spaces
         });
     }
