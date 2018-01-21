@@ -71,6 +71,15 @@ server.route({
 
 server.route({
     method: 'GET',
+    path: '/test',
+    handler: function (request, h) {
+        var sr = ["hi", "bye"];
+		return sr;
+    }
+});
+
+server.route({
+    method: 'GET',
     path: '/storages',
     handler: function (request, h) {
         return getStorageData().then((storages) => { return storages });
